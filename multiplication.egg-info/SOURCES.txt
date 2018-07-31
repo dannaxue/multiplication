@@ -1,0 +1,6 @@
+README.md
+bin/multiplication
+multiplication/__init__.py
+multiplication/mainwindow.py
+sofia.egg-info/SOURCES.txt
+sofia.egg-info/top_level.txt

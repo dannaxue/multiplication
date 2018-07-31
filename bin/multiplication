@@ -1,0 +1,13 @@
+# -*- coding: utf-8 -*-
+"""
+Spyder Editor
+
+This is a temporary script file.
+"""
+
+#!/usr/bin/env  python
+
+if __name__ == '__main__':
+    import sys
+    from multiplication import start
+    sys.exit(start.main())
