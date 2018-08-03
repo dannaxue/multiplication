@@ -108,11 +108,11 @@ class START_SCREEN(QWidget):
     def generateAnswer(self):
         for i, button in enumerate(self.button_array):
             button.disconnect()
+        answerBank = set([])
         self.correct = True
         self.quitButton.hide()
         self.stopButton.show()
         self.tracker = 0;
-        self.button_location = np.zeros(4,)
         self.x = int(self.value[0])
         if self.x != -1:
             firstInt = self.x
@@ -135,14 +135,15 @@ class START_SCREEN(QWidget):
                 button.setText(str(self.ans))
                 button.setStyleSheet("background-color: green")
                 button.clicked.connect(self.rightAnswer)
-                
-                
+                answerBank.add(self.ans)
             else:
                 fakeAnswer = np.random.randint(0, 9) * np.random.randint(0, 9)
+                while (fakeAnswer in answerBank) == True:
+                    fakeAnswer = np.random.randint(0, 9) * np.random.randint(0, 9)
+                answerBank.add(fakeAnswer)
                 button.setText(str(fakeAnswer))
                 button.setStyleSheet("QPushButton { background-color: green }"
-                                     "QPushButton:pressed { background-color: red }" )
-                self.button_location[i] = 1;
+                                     "QPushButton:clicked { background-color: red }" )
                 button.clicked.connect(self.wrongAnswer)
                 
         
@@ -154,7 +155,6 @@ class START_SCREEN(QWidget):
         if self.correct == True:
             self.score +=1
         self.label.setText(self.sol + str(self.ans) + '       Correct! :)' + '      Your Score is: ' + str(self.score))
-        print('Right')
         
     def STOP(self):
         self.label.setText('Multiplication Game')
