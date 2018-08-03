@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 import sys
 import os
-from PyQt5.QtWidgets import QButtonGroup, QSizePolicy, QWidget, QInputDialog, QMainWindow, QApplication, QVBoxLayout, QHBoxLayout, QLabel, QPushButton, QFrame
+from PyQt5.QtWidgets import QWidget, QInputDialog, QMainWindow, QApplication, QVBoxLayout, QHBoxLayout, QLabel, QPushButton
 # from multiplication.display import playState
 from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QFont
+from PyQt5.QtGui import QFont, QIcon, QPixmap
 import numpy as np
 
 class GUI(QMainWindow):
@@ -40,17 +40,33 @@ class START_SCREEN(QWidget):
     def __init__(self, parent):
         super().__init__()
         self.parent = parent
+        self.path0 = parent.path0
         self.layout = QVBoxLayout()
-        self.label = QLabel('Multiplication Game')
+        self.label = QLabel('Multiplication')
         self.layout.addWidget(self.label)
+        self.label.setAlignment(Qt.AlignCenter)
+
+        self.image = QLabel()
+        self.image.setAlignment(Qt.AlignCenter)
+
+        self.pixmap = QPixmap(self.path0 + '/icons/hex.png')
+        self.smaller_pixmap = self.pixmap.scaled(400, 400, Qt.KeepAspectRatio, Qt.FastTransformation)
+
+        self.image.setPixmap(self.smaller_pixmap)
+
         font = QFont("Arial", 40, QFont.Bold)
         self.label.setFont(font)
         self.buttonShelf = QWidget()
         self.buttonShelfLayout = QHBoxLayout()
         self.startButton = QPushButton('Start')
+        self.startButton.setFixedSize(200, 50)
         self.quitButton = QPushButton('Quit')
-
+        self.quitButton.setFixedSize(200, 50)
+        # self.startButton.setAlignment(Qt.AlignCenter)
+        # self.quitButton.setAlignment(Qt.AlignCenter)
         self.stopButton = QPushButton('Stop')
+        self.stopButton.setFixedSize(200, 50)
+
         self.stopButton.hide()
         # self.stopButton.clicked.connect(self.STOP)
         # self.startButton.resize(50,50)
@@ -60,19 +76,27 @@ class START_SCREEN(QWidget):
         self.buttonShelfLayout.addWidget(self.stopButton)
         self.buttonShelfLayout.addWidget(self.quitButton)
         self.buttonShelf.setLayout(self.buttonShelfLayout)
-        
-        self.value = [-1]
+
         self.getValue = QPushButton('Pick a Number')
         self.getValue.clicked.connect(self.prompt)
+
         # self.layout.addWidget(self.input)
         #self.layout.addWidget(self.table)
+        self.layout.addWidget(self.getValue)
+        self.layout.addWidget(self.image)
         self.layout.addWidget(self.getValue)
         self.layout.addWidget(self.buttonShelf)
         self.setLayout(self.layout)
         
     def prompt(self):
+        check = -1
+        arr = set([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
         self.value = QInputDialog.getText(self, 'Window', 'Enter an integer between 0-9')
-        
+        check = int(self.value[0])
+        print(check)
+        if check in arr == False:
+            self.prompt()
+            
     def playState(self):
         self.label.setText('')
         self.row0 = QLabel()
@@ -86,7 +110,7 @@ class START_SCREEN(QWidget):
         self.btn2 = QPushButton('2')
         self.btn3 = QPushButton('3')
         self.btn4 = QPushButton('4')
-        
+       
         self.layoutrow1 = QHBoxLayout()
         self.layoutrow2 = QHBoxLayout()
 
@@ -106,6 +130,7 @@ class START_SCREEN(QWidget):
         self.generateAnswer()
     
     def generateAnswer(self):
+        self.image.hide()
         for i, button in enumerate(self.button_array):
             button.disconnect()
         answerBank = set([])
@@ -159,6 +184,7 @@ class START_SCREEN(QWidget):
         self.label.setText(self.sol + str(self.ans) + '       Correct! :)' + '      Your Score is: ' + str(self.score))
         
     def STOP(self):
+        self.image.show()
         self.label.setText('Multiplication Game')
         self.newscreen = START_SCREEN(self)
         self.startButton.setText('Start')
