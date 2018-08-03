@@ -15,7 +15,7 @@ config = {
     'packages': ['multiplication'],
     'scripts': ['bin/multiplication'],
     'include_package_data': True,
-    # 'package_data': {'multiplication': ['icons/*.png', 'icons/*.gif', 'stylesheet.css']}
+    'package_data': {'multiplication': ['stylesheet.css']}
 }
 
 setup(**config)
