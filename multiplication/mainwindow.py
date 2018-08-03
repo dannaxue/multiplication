@@ -39,7 +39,7 @@ class GUI(QMainWindow):
 class START_SCREEN(QWidget):
      
     
-    #modifies cenral widget
+    # modifies cenral widget
     def __init__(self, parent):
         super().__init__()
         self.parent = parent
