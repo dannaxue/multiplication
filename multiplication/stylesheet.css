@@ -1,0 +1,16 @@
+/* Style Sheet doc.qt.io/qt-5/stylesheet-examples.html */
+QMainWindow{
+background-color : QLinearGradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 Lavender, stop: 1 lightBlue);
+}
+
+QPushButton{
+    background-color: green;
+    width: 30px;
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: beige;
+    font: bold 14px;
+    min-width: 10em;
+    padding: 6px;
+}

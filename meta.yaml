@@ -1,0 +1,27 @@
+package:
+  name: multiplication
+  version: 0.0.1
+  
+source:
+  git_tag: master
+  git_url: https://github.com/dannaxue/multiplication.git
+
+build:
+
+requirements:
+  build:
+    - python
+    - setuptools
+    
+  run:
+    - python >=3.6
+
+test:
+  imports:
+    - multiplication
+
+about:
+  home: https://github.com/dannaxue/multiplication
+  license: MIT
+  description: 'Multiplication practice'   
+  

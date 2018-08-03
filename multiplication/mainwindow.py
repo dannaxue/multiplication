@@ -110,6 +110,7 @@ class START_SCREEN(QWidget):
             button.disconnect()
         
         self.quitButton.hide()
+        self.stopButton.show()
         self.tracker = 0;
         self.button_location = np.zeros(4,)
         self.x = int(self.value[0])
