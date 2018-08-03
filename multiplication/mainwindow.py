@@ -72,7 +72,6 @@ class START_SCREEN(QWidget):
         
     def prompt(self):
         self.value = QInputDialog.getText(self, 'Window', 'Enter an integer between 0-9')
-        self.getValue.hide()
         
     def playState(self):
         self.label.setText('')
@@ -102,6 +101,7 @@ class START_SCREEN(QWidget):
         self.row1.setLayout(self.layoutrow1)
         self.row2.setLayout(self.layoutrow2)
         self.button_array = [self.btn1, self.btn2, self.btn3, self.btn4]
+        self.getValue.hide()
         self.startButton.disconnect()
         self.generateAnswer()
     
