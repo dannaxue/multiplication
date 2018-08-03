@@ -109,6 +109,7 @@ class START_SCREEN(QWidget):
         for i, button in enumerate(self.button_array):
             button.disconnect()
         answerBank = set([])
+        
         self.correct = True
         self.quitButton.hide()
         self.stopButton.show()
@@ -121,6 +122,8 @@ class START_SCREEN(QWidget):
             
         secondInt = np.random.randint(0, 9)
         self.ans = firstInt * secondInt
+        answerBank.add(self.ans)
+
         self.startButton.setText('Next')
         self.startButton.clicked.connect(self.generateAnswer)
         self.stopButton.clicked.connect(self.STOP)
@@ -135,7 +138,6 @@ class START_SCREEN(QWidget):
                 button.setText(str(self.ans))
                 button.setStyleSheet("background-color: green")
                 button.clicked.connect(self.rightAnswer)
-                answerBank.add(self.ans)
             else:
                 fakeAnswer = np.random.randint(0, 9) * np.random.randint(0, 9)
                 while (fakeAnswer in answerBank) == True:
@@ -143,7 +145,7 @@ class START_SCREEN(QWidget):
                 answerBank.add(fakeAnswer)
                 button.setText(str(fakeAnswer))
                 button.setStyleSheet("QPushButton { background-color: green }"
-                                     "QPushButton:clicked { background-color: red }" )
+                                     "QPushButton:pressed { background-color: red }" )
                 button.clicked.connect(self.wrongAnswer)
                 
         
