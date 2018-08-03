@@ -55,7 +55,7 @@ class START_SCREEN(QWidget):
         # self.stopButton.clicked.connect(self.STOP)
         # self.startButton.resize(50,50)
         self.startButton.clicked.connect(self.playState)
-        self.quitButton.clicked.connect(self.close)
+        self.quitButton.clicked.connect(sys.exit)
         self.buttonShelfLayout.addWidget(self.startButton)
         self.buttonShelfLayout.addWidget(self.stopButton)
         self.buttonShelfLayout.addWidget(self.quitButton)
@@ -108,7 +108,7 @@ class START_SCREEN(QWidget):
     def generateAnswer(self):
         for i, button in enumerate(self.button_array):
             button.disconnect()
-        
+        self.correct = True
         self.quitButton.hide()
         self.stopButton.show()
         self.tracker = 0;
@@ -147,10 +147,12 @@ class START_SCREEN(QWidget):
                 
         
     def wrongAnswer(self):
+        self.correct = False
         self.label.setText(self.sol + '?' + ' Try again.')
         
-    def rightAnswer(self, button):                
-        self.score += 1
+    def rightAnswer(self, button):
+        if self.correct == True:
+            self.score +=1
         self.label.setText(self.sol + str(self.ans) + '       Correct! :)' + '      Your Score is: ' + str(self.score))
         print('Right')
         
