@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+
 import sys
 import os
 from PyQt5.QtWidgets import QWidget, QInputDialog, QMainWindow, QApplication, QVBoxLayout, QHBoxLayout, QLabel, QPushButton
@@ -245,7 +246,6 @@ class START_SCREEN(QWidget):
         self.startButton.clicked.connect(self.playState)
         self.row1.hide()
         self.row2.hide()
-        self.scoreBoard.hide()
         
 def main():
     app = QApplication(sys.argv)
